@@ -1,0 +1,47 @@
+# Node modules
+node_modules/
+
+# PHP dependencies
+vendor/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Build output
+dist/
+build/
+
+# Cache directories
+.cache/
+.temp/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Media files
+*.mp4
