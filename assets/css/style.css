@@ -838,7 +838,7 @@ footer {
 
     .nav-links.open {
         display: flex;
-        max-height: 450px;
+        max-height: 510px;
         padding-bottom: 20px;
     }
 
