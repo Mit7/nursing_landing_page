@@ -149,62 +149,86 @@ let popupShown = false;
 
 
 
-  
-// ... (all your existing code from script.js)
-
-// ------------------------------------
-// 7. Creative Testimonial Fader
+  // ------------------------------------
+// 7. Creative Testimonial Fader (with Autoplay)
 // ------------------------------------
 (function initTestimonialFader() {
     const container = document.querySelector('.testimonial-fader-container');
     if (!container) return; // Don't run if this section doesn't exist
 
     const cards = container.querySelectorAll('.testimonial-card');
-    const prevBtn = document.getElementById('prev-testimonial');
-    const nextBtn = document.getElementById('next-testimonial');
-    const counterEl = document.getElementById('testimonial-counter');
-
-    if (!cards.length || !prevBtn || !nextBtn || !counterEl) return; // Missing elements
+    // Get new arrow buttons
+    const prevBtn = document.getElementById('testimonial-slide-prev');
+    const nextBtn = document.getElementById('testimonial-slide-next');
+    
+    // Check for new elements
+    if (!cards.length || !prevBtn || !nextBtn) return; 
 
     let currentIndex = 0;
     const totalCards = cards.length;
+    let autoPlayInterval = null;
+    const autoPlayDelay = 5000; // 5 seconds
 
     function showTestimonial(index) {
         // Hide all cards
         cards.forEach(card => card.classList.remove('active'));
-
         // Show the correct card
         cards[index].classList.add('active');
+    }
 
-        // Update counter
-        counterEl.textContent = `${index + 1} / ${totalCards}`;
-        
-        // Update button states (optional but good UI)
-        prevBtn.disabled = (index === 0);
-        nextBtn.disabled = (index === totalCards - 1);
+    function showNext() {
+        currentIndex++;
+        if (currentIndex >= totalCards) {
+            currentIndex = 0; // Loop to start
+        }
+        showTestimonial(currentIndex);
+    }
+
+    function showPrev() {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = totalCards - 1; // Loop to end
+        }
+        showTestimonial(currentIndex);
+    }
+
+    function startAutoPlay() {
+        // Clear any existing interval before starting a new one
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(showNext, autoPlayDelay);
+    }
+
+    function resetAutoPlay() {
+        clearInterval(autoPlayInterval);
+        startAutoPlay();
     }
 
     // Next button click
     nextBtn.addEventListener('click', () => {
-        if (currentIndex < totalCards - 1) {
-            currentIndex++;
-            showTestimonial(currentIndex);
-        }
+        showNext();
+        resetAutoPlay(); // Reset timer on manual click
     });
 
     // Previous button click
     prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            showTestimonial(currentIndex);
-        }
+        showPrev();
+        resetAutoPlay(); // Reset timer on manual click
+    });
+
+    // Pause autoplay on hover over the container
+    container.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+    });
+
+    // Resume autoplay when mouse leaves
+    container.addEventListener('mouseleave', () => {
+        startAutoPlay();
     });
 
     // Initial setup
     showTestimonial(0);
-
+    startAutoPlay(); // Start the autoplay
 })();
-
 
 
 
