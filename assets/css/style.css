@@ -1854,3 +1854,82 @@ footer {
 
 
 
+/* --- HERO SECTION MEDIA QUERIES --- */
+
+/* Tablet View (e.g., max-width: 1024px) */
+@media (max-width: 1024px) {
+    .hero-section {
+        /* *** REPLACE with your tablet-optimized image *** */
+        background-image: url('../images/hrbrn.webp');
+        
+        /* Optional: Adjust padding or min-height for tablet layout */
+        /* padding: 60px 5%;  */
+        align-items: end;
+        
+    }
+}
+
+/* Add this new class definition somewhere in the main CSS */
+.hero-image-mobile-square {
+    display: none; /* Hidden by default on desktop view */
+}
+
+/* ... existing styles ... */
+
+/* --- HERO SECTION MEDIA QUERIES --- */
+
+/* Mobile View (e.g., max-width: 600px) */
+@media (max-width: 600px) {
+    .hero-section {
+        /* 1. Stack photo/text (left) then form (right) */
+        flex-direction: column;
+        padding: 40px 5%; /* Adjusted padding for mobile */
+        min-height: auto; /* Allow height to adjust to content */
+        /* Ensure the mobile background image is still applied if needed */
+        background-image: none; 
+        background-color: white !important;
+    }
+
+    .enquiry-form-container {
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    /* Make both content areas take full width and remove desktop flex logic */
+    .hero-content-left,
+    .hero-content-right {
+        flex: none; 
+        width: 100%; 
+        padding-right: 0;
+    }
+
+    /* Add a gap between the sections (photo/text and the form) */
+    .hero-content-left {
+        margin-bottom: 30px; 
+    }
+
+    /* New: Display and style the square photo container */
+    .hero-image-mobile-square {
+        display: block; /* Show on mobile */
+        width: 100%;
+        /* The square shape trick: aspect ratio 1:1 */
+        padding-top: 100%; 
+        /* Placeholder image - replace the path below with your actual photo */
+        background: #f1f1f1 url('../images/hrbrn-mobile.webp') no-repeat center center/cover; 
+        border-radius: 8px;
+        margin-bottom: 20px; /* Space between the photo and the hero text/stats */
+        /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Ensure the text content is still readable (existing styles are fine, but keeping this block for context) */
+    .course-title {
+        font-size: 2em; 
+    }
+    
+    .hero-stats span {
+        display: block;
+        margin: 10px 0;
+    }
+    
+    /* ... rest of the @media (max-width: 600px) styles ... */
+}
